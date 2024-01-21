@@ -1,0 +1,86 @@
+---
+title: "Osmosis CLI Guide"
+description: "A comprehensive guide for Osmosis node operators, featuring essential CLI commands for efficient network management."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "CLI"]
+keywords: ["Osmosis CLI", "Node Operations", "Command Guide"]
+order: 4
+disabled: false
+---
+
+# Osmosis CLI Cheatsheet
+
+This cheatsheet is an essential tool for Osmosis node operators, providing a collection of frequently used CLI commands for easy reference and use.
+
+## Conventions Used:
+
+- Placeholders are denoted by capitalized words.
+- Default to using Polkachu's Osmosis RPC endpoints.
+- Include `--chain-id` and `--node` flags in commands, even if they seem redundant.
+- For querying, consistently use the `--output json` flag and pipe the output through `jq`.
+
+## Essential CLI Commands
+
+### Bank: Sending Tokens
+```bash
+osmosisd tx bank send KEY RECEIVER_ADDRESS 1000000uosmo \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 --gas-adjustment 2 --gas auto --gas-prices 0.0025uosmo \
+  --from KEY
+```
+
+### Distribution: Withdrawing Rewards and Commission
+```bash
+osmosisd tx distribution withdraw-rewards VALIDATOR_OPERATOR \
+  --commission \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 --gas-adjustment 2 --gas auto --gas-prices 0.0025uosmo \
+  --from KEY
+```
+
+### Governance: Querying Proposals
+```bash
+osmosisd query gov proposal PROPOSAL_NUMBER \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 \
+  --output json | jq
+```
+
+### Governance: Voting on Proposals
+Vote options include yes, no, no_with_veto, and abstain.
+```bash
+osmosisd tx gov vote PROPOSAL_NUMBER VOTE_OPTION \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 --gas-adjustment 2 --gas auto --gas-prices 0.0025uosmo \
+  --from KEY
+```
+
+### Slashing: Unjailing a Validator
+```bash
+osmosisd tx slashing unjail \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 --gas-adjustment 2 --gas auto --gas-prices 0.0025uosmo \
+  --from KEY
+```
+
+### Staking: Creating a Validator
+Note: This command uses example values for demonstration. Adjust them as needed for your setup.
+```bash
+osmosisd tx staking create-validator \
+  --amount 1000000uosmo \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.10" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey=$(osmosisd tendermint show-validator) \
+  --moniker 'polkachu.com' \
+  --website "https://polkachu.com" \
+  --identity "0A6AF02D1557E5B4" \
+  --details "Polkachu is the trusted staking service provider for blockchain projects. 100% refund for downtime slash. Contact us at hello@polkachu.com" \
+  --security-contact="hello@polkachu.com" \
+  --chain-id osmosis-1 \
+  --node https://osmosis-rpc.polkachu.com:443 --gas-adjustment 2 --gas auto --gas-prices 0.0025uosmo \
+  --from KEY
+```
+
+This guide serves as a quick reference for Osmosis node operators, ensuring efficient and effective network management through the use of CLI commands.

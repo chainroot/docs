@@ -1,0 +1,49 @@
+---
+title: "Validator Setup on Osmosis"
+description: "Step-by-step guide to becoming a validator on the Osmosis network, covering node setup, wallet initialization, and validator creation."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "Validator"]
+keywords: ["Osmosis Validator", "Node Setup", "Staking", "Blockchain Security"]
+order: 6
+disabled: false
+---
+
+# Establishing a Validator on Osmosis
+
+Becoming a validator on the Osmosis network is a multi-step process that involves node operation, wallet management, and validator initiation.
+
+## Steps to Run a Validator
+
+### 1. Node Operation
+- **Mainnet vs. Testnet**: Choose between running a node on the mainnet or testnet. Mainnet operation requires advanced network security knowledge. Refer to [Running a Node](./running-a-node.mdx) for detailed instructions.
+
+### 2. Wallet Keyring Setup
+- **Creating a Wallet**: Use `osmosisd keys add [KEY_NAME]` to create a new wallet. Securely store the mnemonic phrase generated during this process.
+
+### 3. Acquiring Validator Public Key
+- **Public Key Retrieval**: Obtain your validator's public key with `osmosisd tendermint show-validator`.
+
+### 4. Validator Initialization
+- **Staking OSMO**: Ensure your wallet has a sufficient OSMO balance. Initialize your validator using:
+  ```bash
+  osmosisd tx staking create-validator \
+  --from=[KEY_NAME] \
+  --amount=[staking_amount_uosmo] \
+  --pubkey=$(osmosisd tendermint show-validator) \
+  --moniker="[moniker_id_of_your_node]" \
+  --security-contact="[security contact email/contact method]" \
+  --chain-id="[chain-id]" \
+  --commission-rate="[commission_rate]" \
+  --commission-max-rate="[maximum_commission_rate]" \
+  --commission-max-change-rate="[maximum_rate_of_change_of_commission]" \
+  --min-self-delegation="[min_self_delegation_amount]"
+  ```
+  Replace placeholders with your specific details.
+
+### 5. Validator Management
+- **Performance Monitoring**: Regularly monitor and manage your validator to maintain security and efficiency.
+
+## Important Considerations
+Running a validator demands a solid grasp of blockchain technology and network security. Stay updated with the latest practices by consulting the [Osmosis Validator Guide](https://osmosis-labs.github.io/osmosis/validators/) and [Osmosis Documentation](https://docs.osmosis.zone/overview/validate/).
+
+These resources offer in-depth guidance on each step of the process and provide additional tips for effective validator management.
