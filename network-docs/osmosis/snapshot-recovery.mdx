@@ -1,0 +1,97 @@
+---
+title: "Osmosis Snapshot Guide"
+description: "A detailed guide on managing and recovering snapshots for Osmosis node operators, ensuring efficient node operation."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "Node Management"]
+keywords: ["Osmosis Snapshot", "Node Recovery", "Data Management"]
+order: 7
+disabled: false
+---
+
+# Managing Snapshots in Osmosis
+
+This document outlines the process for handling daily snapshots on the Osmosis network, crucial for efficient node operation and data management.
+
+## Snapshot Server Operations
+
+### Daily Snapshot Routine
+- **Snapshot Frequency**: A new snapshot is captured daily, with older snapshots being removed to conserve server space.
+
+### Snapshot Characteristics
+- **Snapshot Purpose**: Designed for node operators to maintain an efficient Osmosis node.
+- **Pruning Settings** in `app.toml`:
+  ```toml
+  pruning = "custom"
+  pruning-keep-recent = "100"
+  pruning-keep-every = "0"
+  pruning-interval = "10"
+  ```
+- **Indexer Setting** in `config.toml`:
+  ```toml
+  indexer = "null"
+  ```
+
+## Snapshot Recovery Process
+
+### Preparing for Recovery
+- **Install lz4 Compression Tool**:
+  ```bash
+  sudo apt update
+  sudo apt install snapd -y
+  sudo snap install lz4
+  ```
+- **Downloading the Snapshot**:
+  ```bash
+  wget -O osmosis_13353071.tar.lz4 https://snapshots.polkachu.com/snapshots/osmosis/osmosis_13353071.tar.lz4 --inet4-only
+  ```
+
+### Node Reset and Backup
+- **Stopping the Node**:
+  ```bash
+  sudo service osmosis stop
+  ```
+- **Backing Up Validator Keys**:
+  ```bash
+  cp ~/.osmosisd/data/priv_validator_state.json  ~/.osmosisd/priv_validator_state.json
+  ```
+- **Resetting the Node**:
+  ```bash
+  osmosisd unsafe-reset-all
+  ```
+
+### Snapshot Decompression and Restoration
+- **Removing the Wasm Folder**:
+  ```bash
+  rm -r ~/.osmosisd/wasm
+  ```
+- **Decompressing the Snapshot**:
+  ```bash
+  lz4 -c -d osmosis_13353071.tar.lz4  | tar -x -C $HOME/.osmosisd
+  ```
+- **Restoring Validator State**:
+  ```bash
+  cp ~/.osmosisd/priv_validator_state.json  ~/.osmosisd/data/priv_validator_state.json
+  ```
+
+### Final Steps
+- **Restarting the Node**:
+  ```bash
+  sudo service osmosis start
+  ```
+- **Cleaning Up**:
+  ```bash
+  rm -v osmosis_13353071.tar.lz4
+  ```
+- **Verifying Node Operation**:
+  ```bash
+  sudo service osmosis status
+  sudo journalctl -u osmosis -f
+  ```
+
+### Advanced Streaming Method
+For experienced users, a direct streaming method to handle snapshots:
+```bash
+curl -o - -L https://snapshots.polkachu.com/snapshots/osmosis/osmosis_13353071.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.osmosisd
+```
+
+This guide provides comprehensive steps for Osmosis node operators to manage and recover snapshots, ensuring optimal node performance and data integrity.

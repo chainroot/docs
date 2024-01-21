@@ -1,0 +1,89 @@
+---
+title: "Osmosis Node Setup"
+description: "Complete guide to setting up an Osmosis node, including Go and Cosmovisor installation, node configuration, and service initiation."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "Node Setup"]
+keywords: ["Osmosis Node", "Installation", "Configuration", "Cosmovisor"]
+order: 5
+disabled: false
+---
+
+# Setting Up an Osmosis Node
+
+This guide provides step-by-step instructions for setting up an Osmosis node, including necessary installations and configurations.
+
+## Preparing the Environment
+
+### Installing Go and Cosmovisor
+- **Go Installation**: (Skip if already installed)
+  ```bash
+  sudo rm -rvf /usr/local/go/
+  wget https://golang.org/dl/go1.21.1.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz
+  rm go1.21.1.linux-amd64.tar.gz
+  ```
+- **Setting Go Environment**:
+  ```bash
+  echo 'export GOROOT=/usr/local/go' >> ~/.profile
+  echo 'export GOPATH=$HOME/go' >> ~/.profile
+  echo 'export GO111MODULE=on' >> ~/.profile
+  echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.profile
+  source ~/.profile
+  ```
+- **Cosmovisor Installation**:
+  ```bash
+  go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+  ```
+
+### Node Installation and Configuration
+- **Cloning and Building Osmosis**:
+  ```bash
+  git clone https://github.com/osmosis-labs/osmosis osmosis
+  cd osmosis
+  git checkout v22.0.0
+  make install
+  ```
+- **Initializing the Node**:
+  Replace `YOUR_MONIKER` with your chosen moniker.
+  ```bash
+  osmosisd init YOUR_MONIKER --chain-id osmosis-1
+  ```
+
+### Genesis File and Seed Configuration
+- **Genesis File Setup**:
+  ```bash
+  wget -O genesis.json https://snapshots.polkachu.com/genesis/osmosis/genesis.json --inet4-only
+  mv genesis.json ~/.osmosisd/config
+  ```
+- **Seed Node Configuration**:
+  ```bash
+  sed -i 's/seeds = ""/seeds = "ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@seeds.polkachu.com:12556"/' ~/.osmosisd/config/config.toml
+  ```
+
+## Launching the Node
+
+### Cosmovisor and Service Setup
+- **Cosmovisor Directory Setup**:
+  ```bash
+  mkdir -p ~/.osmosisd/cosmovisor/genesis/bin
+  mkdir -p ~/.osmosisd/cosmovisor/upgrades
+  cp ~/go/bin/osmosisd ~/.osmosisd/cosmovisor/genesis/bin
+  ```
+- **Creating the Service File**:
+  Replace `USER` with your Linux username.
+  ```bash
+  # Create osmosis.service file in /etc/systemd/system
+  ```
+- **Service Activation and Monitoring**:
+  ```bash
+  sudo systemctl enable osmosis.service
+  sudo service osmosis start
+  sudo journalctl -fu osmosis
+  ```
+
+## Additional Considerations
+- **Automating Installation**: Consider using Ansible for automated node setup.
+- **Network Security**: Configure the firewall to secure the node, keeping essential ports open.
+- **Running Multiple Nodes**: Use custom ports for each node if running multiple instances.
+
+This guide covers the essentials for setting up an Osmosis node. For more advanced configurations and troubleshooting, refer to the official Osmosis documentation.
