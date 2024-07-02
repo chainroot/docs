@@ -1,0 +1,14 @@
+name: Build and push Docker images
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    uses: chainroot/kb/.github/workflows/copy-docs.yml@add-workflow-docs
+    with:
+      commit-message: ${{ env.COMMIT_MESSAGE }}
+      committer: ${{ github.actor }}
