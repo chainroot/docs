@@ -1,0 +1,71 @@
+---
+title: "Snapshot Recovery on Pryzm Network"
+description: "Step-by-step guide on how to recover a Pryzm node from a snapshot, ensuring quick restoration and minimal downtime."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Snapshot Recovery"]
+keywords: ["Pryzm Snapshot", "Node Recovery", "Blockchain Backup", "Pryzm Network"]
+order: 7
+draft: false
+---
+
+# Snapshot Recovery on Pryzm Network
+
+Recovering your Pryzm node from a snapshot is an efficient way to restore your node without syncing from genesis, significantly reducing downtime. This guide provides detailed instructions on how to use snapshots from `ss.chainroot.io` for recovery.
+
+## Prerequisites
+
+Before starting the recovery process, ensure that you have:
+
+- A running Pryzm node that you can stop and restart.
+- Sufficient disk space to accommodate the snapshot and future blocks.
+- A stable internet connection for downloading the snapshot.
+
+## Steps for Snapshot Recovery
+
+### 1. Stop your Pryzm node
+
+Ensure that no processes are running that might modify the data while you're performing the snapshot recovery.
+
+```bash
+sudo systemctl stop pryzmd
+```
+
+### 2. Download the Snapshot
+
+Download the latest snapshot available from `ss.chainroot.io`. It's recommended to use `wget` or `curl` for downloading.
+
+```bash
+wget https://ss.chainroot.io/pryzm-latest.tar.gz
+```
+
+### 3. Extract the Snapshot
+
+Once the download is complete, extract the snapshot file to the appropriate directory, typically where your Pryzm data is stored.
+
+```bash
+tar -xvzf pryzm-latest.tar.gz -C /path/to/pryzm/data
+```
+
+### 4. Restart your Pryzm node
+
+After successfully extracting the snapshot, restart your node. It will start syncing from the point the snapshot was taken.
+
+```bash
+sudo systemctl start pryzmd
+```
+
+## Verifying Node Sync
+
+After starting your node, it's important to verify that it is syncing correctly.
+
+```bash
+pryzmd status
+```
+
+This command should show that your node is catching up from the snapshot height to the current block height.
+
+## Conclusion
+
+Using snapshots for recovery can significantly reduce the time it takes to get your Pryzm node operational after downtime or when migrating to new hardware. Always ensure that snapshots are obtained from reliable sources and that you have backups of your own node to prevent data loss.
+
+For more advanced recovery options or troubleshooting, consult the Pryzm documentation or reach out to the support community.

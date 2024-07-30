@@ -1,0 +1,87 @@
+---
+title: "Pryzm CLI Cheatsheet"
+description: "A handy cheatsheet for Pryzm node operators, featuring commonly used CLI commands for quick reference and use."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "CLI Cheatsheet"]
+keywords: ["Pryzm CLI", "Node Operators", "CLI Commands", "Pryzm Network"]
+order: 4
+draft: false
+---
+
+# Pryzm CLI Cheatsheet
+
+This cheatsheet provides a collection of commonly used CLI commands for Pryzm node operators. It's designed for easy copying and pasting, with a few conventions:
+
+- Capitalized words are placeholders.
+- Use specific endpoints for consistency.
+- Always include `--chain-id` and `--node` flags.
+- Query commands output in JSON format and are piped through `jq`.
+
+## Account Management
+
+- **Create a New Account**:
+  ```bash
+  pryzmd keys add ACCOUNT_NAME --keyring-backend KEYRING_BACKEND
+  ```
+
+- **List All Accounts**:
+  ```bash
+  pryzmd keys list --keyring-backend KEYRING_BACKEND
+  ```
+
+- **Show Account Details**:
+  ```bash
+  pryzmd keys show ACCOUNT_NAME --keyring-backend KEYRING_BACKEND
+  ```
+
+## Bank: Send Tokens
+```bash
+pryzmd tx bank send SENDER_ADDRESS RECEIVER_ADDRESS AMOUNTuatom \
+  --chain-id pryzm-chain \
+  --node https://pryzm-rpc.example.com:443 --gas=auto --gas-prices=0.005uatom --gas-adjustment=1.5 \
+  --from YOUR_KEY
+```
+
+## Staking: Delegate Tokens
+```bash
+pryzmd tx staking delegate VALIDATOR_ADDRESS AMOUNTuatom \
+  --chain-id pryzm-chain \
+  --node https://pryzm-rpc.example.com:443 --gas=auto --gas-prices=0.005uatom --gas-adjustment=1.5 \
+  --from YOUR_KEY
+```
+
+## Governance: Vote on Proposal
+```bash
+pryzmd tx gov vote PROPOSAL_NUMBER VOTE_OPTION \
+  --chain-id pryzm-chain \
+  --node https://pryzm-rpc.example.com:443 --gas=auto --gas-prices=0.005uatom --gas-adjustment=1.5 \
+  --from YOUR_KEY
+```
+
+- **Note**: `VOTE_OPTION` can be yes, no, no_with_veto, or abstain.
+
+## Querying the Blockchain
+
+- **Get Blockchain Status**:
+  ```bash
+  pryzmd status
+  ```
+
+- **Query Account Balances**:
+  ```bash
+  pryzmd query bank balances ACCOUNT_ADDRESS --chain-id pryzm-chain --node https://pryzm-rpc.example.com:443
+  ```
+
+## Advanced Commands
+
+- **Simulate a Transaction**:
+  ```bash
+  pryzmd tx simulate --from YOUR_KEY [additional flags]
+  ```
+
+- **Broadcast a Transaction**:
+  ```bash
+  pryzmd tx broadcast TX_FILE --chain-id pryzm-chain --node https://pryzm-rpc.example.com:443
+  ```
+
+Remember, always double-check your commands and configurations. For a complete list of commands and options, use `pryzmd --help` or consult the Pryzm documentation.

@@ -1,0 +1,89 @@
+---
+title: "Network Modules of Pryzm"
+description: "In-depth exploration of all key modules within the Pryzm network, emphasizing their unique functionalities and contributions to decentralized finance and yield management."
+author: "Moein Fatehi"
+categories: ["Blockchain", "DeFi", "Network Modules"]
+keywords: ["Pryzm Network", "Blockchain Modules", "Yield Management", "DeFi", "Tokenization", "Liquid Staking", "Decentralized Systems"]
+order: 3
+draft: false
+---
+
+# Network Modules of Pryzm
+
+Pryzm's modular architecture is central to its functionality, allowing for a highly adaptable and robust decentralized finance ecosystem. This document provides an in-depth look at the core and third-party modules that define the Pryzm network.
+
+## Core Modules Developed by Pryzm
+
+### ICStaking Module
+- **Functionality**: Provides interchain liquid staking for cosmos-based chains’ native tokens and minting cASSET as the LSD.
+
+### Assets Module
+- **Functionality**: Manages assets eligible for refraction and trading on Pryzm.
+
+### Refractor Module
+- **Functionality**: Enables the refraction of supported assets into pASSET and yASSET, allowing for the merging and redemption of these assets.
+
+### YStaking Module
+- **Functionality**: Facilitates the staking of yASSETs to earn rewards through staked assets.
+
+### AMM Module
+- **Functionality**: Supports various automated market maker models, enabling the creation, management, and interaction with liquidity pools.
+
+### Incentives Module
+- **Functionality**: Provides incentives for token holders participating in the system.
+
+### PGov Module
+- **Functionality**: Allows cASSET and pASSET holders to participate in governance of their asset's native chain by mirroring proposals on PRYZM.
+
+### Treasury Module
+- **Functionality**: Manages the collection and scheduling of actions on collected fees.
+
+### Mint Module
+- **Functionality**: Controls the minting and distribution of PRYZM tokens.
+
+### Oracle Module
+- **Functionality**: Provides generic oracle functions where modules can integrate oracle services by providing a vote callback.
+
+### FlowTrade Module
+- **Functionality**: Facilitates token swaps within a defined period.
+
+## Modules Copied from Osmosis
+
+### Epochs Module
+- **Functionality**: Provides on-chain timers for other modules to execute code during specific times.
+
+### TokenFactory Module
+- **Functionality**: Allows the minting of new tokens in user-defined subdenominations.
+
+## Third-Party Modules Integrated into PRYZM
+
+### WASMD Module
+- **Functionality**: Enables smart contracts on the chain.
+
+### Block SDK Module
+- **Functionality**: Allows full customization of blocks using application logic; also processes MEV bundled transactions.
+
+### Alliance Module
+- **Functionality**: Facilitates yield trading between blockchains.
+
+### Packet Forward Middleware
+- **Functionality**: An IBC middleware enabling the chain to route incoming IBC packets from a source chain to a destination chain.
+
+### IBC Hooks Module
+- **Functionality**: An IBC middleware that enables ICS-20 token transfers to initiate contract calls.
+
+### IBC Rate Limiting Module
+- **Functionality**: Prevents massive inflows or outflows of IBC tokens in a short time frame as a safety control.
+
+## Integration and Interaction
+- **Description**: These modules interact seamlessly to provide a comprehensive DeFi ecosystem, enhancing both the functionality and security of the Pryzm network.
+
+## Challenges and Solutions
+- **Challenge**: Integrating diverse modules while maintaining high performance and security.
+- **Solution**: Rigorous testing, community feedback, and continuous development to refine and enhance module functionalities.
+
+## Conclusion
+Pryzm's modular architecture provides the foundation for a dynamic and scalable DeFi ecosystem, making it a key player in the advancement of decentralized finance.
+
+## References and Further Reading
+- [Pryzm Official Documentation](https://docs.pryzm.zone/)

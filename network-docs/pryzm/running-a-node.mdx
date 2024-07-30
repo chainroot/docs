@@ -1,0 +1,74 @@
+---
+title: "Running a Pryzm Node"
+description: "Comprehensive guide on setting up and running a Pryzm node using different methods including binary and Docker, as well as managing Pryzm feeders."
+author: "Moein Fatehi"
+categories: ["Blockchain", "DeFi", "Pryzm", "Node Operation"]
+keywords: ["Pryzm", "Node Setup", "Docker", "Binary", "Pryzm Feeder", "Blockchain Network"]
+order: 5
+draft: false
+---
+
+# Running a Pryzm Node
+
+Running a Pryzm node is crucial for participating in the Pryzm network. This guide covers various methods to set up and run a Pryzm node, including binary executions and Docker configurations.
+
+## Running Pryzm with Binary
+
+### Prerequisites
+- **Pryzmd Binary**: Build or download the latest on-chain version of pryzmd.
+- **Permissions**: Ensure executable permissions for your binary.
+
+### Steps
+1. **Execute Pryzmd Binary**: Run the command `./pryzmd [command] [flags]`. For starting the daemon, use `./pryzmd start`.
+2. **Systemd Configuration**: Configure `pryzmd` to run as a systemd service for reliability.
+   - Move the binary to `/usr/bin` with `cp pryzmd /usr/bin/`.
+   - Create and edit the systemd service file `/etc/systemd/system/pryzmd.service` with appropriate configurations.
+3. **Manage Service**:
+   - Reload systemd: `sudo systemctl daemon-reload`
+   - Restart pryzmd: `sudo systemctl restart pryzmd`
+   - Enable on boot: `sudo systemctl enable pryzmd`
+   - Check logs: `journalctl -u pryzmd -fu`
+
+### Configuring Pryzmd
+- **Config Files**: Located in `$HOME/.pryzmd/config`.
+  - `config.toml`: General settings.
+  - `app.toml`: Application-specific settings.
+  - `client.toml`: Pryzm client settings.
+
+## Running Pryzmd with Docker
+
+### Prerequisites
+- **Docker**: Ensure Docker and Docker Compose are installed.
+- **Pryzmd Image**: Obtain the Docker image from `europe-docker.pkg.dev/pryzm-zone/core/pryzmd:0.18.0`.
+
+### Docker Commands
+- **Run Pryzmd**: Execute Pryzmd using Docker by specifying configuration paths and ensuring data persistence. Example commands are provided for both testing and production environments.
+
+### Docker Compose
+- **Setup**: Use a `docker-compose.yml` file for running Pryzmd with Docker Compose.
+- **Execution**: Start the service with `docker-compose up -d` and verify with `docker-compose ps`.
+
+## Running Pryzm Feeder with Binary
+
+### Prerequisites
+- **Pryzm-Feeder Binary**: Build or download the pryzm-feeder binary.
+- **TimescaleDB**: Ensure TimescaleDB is set up correctly.
+
+### Execution
+- **Run Feeder**: Use the command `$ node ./lib/vote.js [config file path]` to start the Pryzm feeder with the appropriate configuration.
+
+### Configuration
+- **Pryzm-Feeder Configuration**: Managed through a `config.yaml` file, details of which can be obtained from the documentation resources page.
+
+## Running Pryzm Feeder with Docker
+
+### Setup
+- **Docker Images**: Ensure Docker images for both pryzm-feeder and TimescaleDB are available.
+- **Configuration**: Proper configuration paths must be set to ensure effective running of the feeder service.
+
+### Docker Compose
+- **Configuration File**: Provide a `docker-compose.yml` file tailored to running the pryzm-feeder.
+- **Management**: Use Docker Compose commands to manage the lifecycle of the pryzm-feeder service.
+
+## Conclusion
+By following these guidelines, you can effectively set up and manage Pryzm nodes and feeders using both binary and Docker methods, ensuring robust participation in the Pryzm network.
