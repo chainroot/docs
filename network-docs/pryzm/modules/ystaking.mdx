@@ -1,0 +1,61 @@
+---
+title: "YStaking Module"
+description: "Explore the yStaking module in PRYZM, which enables users to stake yASSETs and earn rewards."
+author: "Moein Fatehi"
+categories: ["Blockchain", "PRYZM", "Staking"]
+keywords: ["yStaking", "PRYZM", "Staking", "yASSET", "Rewards"]
+order: 4
+disabled: false
+---
+
+## Overview
+
+The **YStaking** module in the PRYZM network allows users to stake yASSETs across different maturities, enabling them to earn rewards based on their staked amount. This module includes functionalities like bonding, unbonding, and claiming rewards, making it a fundamental aspect of the network's DeFi ecosystem.
+
+## Key Features
+
+- **Bonding**: Users can lock their yASSETs into the staking pool to participate in network securing and earning rewards.
+- **Unbonding**: Provides the flexibility to withdraw staked assets after a certain period, adhering to the network's staking policies.
+- **Reward Claims**: Users can claim their accrued rewards based on the amount and duration of their stakes.
+
+## How It Works
+
+### Bonding Process
+
+Users bond their yASSETs to earn staking rewards. The bonded tokens contribute to the network's liquidity and security. The bonding process updates the global and user-specific indices used to calculate rewards.
+
+### Unbonding and Rewards
+
+Unbonding allows users to retrieve their staked tokens. The yStaking module calculates the rewards earned during the staking period at the time of unbonding, which are then distributed to the user's wallet.
+
+### Claiming Rewards
+
+Rewards are calculated per block and can be claimed by users at any time through the yStaking module's claim function. This ensures transparency and flexibility in accessing rewards.
+
+## Technical Implementation
+
+- **Asset Pools**: Each asset has its own pool managing the stakes and rewards distribution.
+- **Maturity Tracking**: Supports multiple maturities for each asset, allowing users to stake in different pools based on their risk and reward preferences.
+
+## Configuration and Management
+
+Administrators can configure the staking parameters, including reward rates, minimum staking amounts, and unbonding periods, to align with the network's strategic goals and market conditions.
+
+## Security Features
+
+The yStaking module incorporates several security measures to protect users' assets and ensure the integrity of the staking process. These include multi-signature controls, regular audits, and real-time monitoring systems.
+
+## User Guide
+
+To participate in yStaking, users need to follow these steps:
+
+1. **Connect Wallet**: Use your PRYZM compatible wallet to connect to the network.
+2. **Select Asset and Maturity**: Choose the asset and maturity period for staking.
+3. **Bond yASSETs**: Lock your yASSETs into the staking pool.
+4. **Claim Rewards**: Access your rewards through the module's user interface.
+
+For more detailed instructions and advanced configurations, refer to the official [PRYZM documentation](https://docs.pryzm.zone/core/ystaking).
+
+## Conclusion
+
+The yStaking module is a core component of the PRYZM network's DeFi functionalities, offering users a robust platform for earning rewards while contributing to network security and stability. Its integration with various blockchain functionalities underscores PRYZM's commitment to providing a comprehensive and user-friendly DeFi ecosystem.
