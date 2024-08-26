@@ -1,0 +1,65 @@
+---
+title: "Block-SDK Module"
+description: "The Block-SDK module enables block customization and processing of MEV bundled transactions on the Pryzm network."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "Block-SDK"]
+keywords: ["Block-SDK", "MEV", "Block Customization", "Pryzm"]
+order: 2
+disabled: false
+---
+
+# Block-SDK Module
+
+The Block-SDK module is integrated into the Pryzm network to allow for full block customization using application logic. Additionally, it supports the processing of MEV (Maximal Extractable Value) bundled transactions, which are critical for decentralized finance (DeFi) and other blockchain applications that rely on efficient block execution.
+
+## Overview
+
+Block-SDK is a third-party module that provides a flexible framework for customizing blocks on the Pryzm network. This module enables developers to define how blocks are structured and processed, allowing for more control over the execution of transactions and smart contracts. It also supports MEV extraction, which can be crucial for optimizing transaction order and execution in DeFi applications.
+
+## Key Features
+
+- **Block Customization**: Allows full customization of block structure and processing logic.
+- **MEV Bundled Transactions**: Supports the processing of MEV transactions, enabling more efficient and optimized execution of transactions.
+- **Application Logic**: Provides flexibility for developers to define how transactions are handled within a block.
+
+## Functions
+
+### Block Customization
+
+The Block-SDK module allows developers to customize the contents and structure of blocks, tailoring the block processing to specific application needs.
+
+```go
+type BlockCustomization struct {
+    BlockID string
+    CustomLogic func(ctx sdk.Context, block sdk.Block)
+}
+```
+
+### MEV Bundling
+
+This module also supports the bundling of MEV transactions, allowing developers to optimize transaction execution and capture additional value.
+
+```bash
+pryzmd tx block-sdk bundle-mev TX_HASH --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the Block-SDK module using the following commands:
+
+- **Query Block Customizations**:
+
+  ```bash
+  pryzmd query block-sdk customizations BLOCK_ID
+  ```
+
+- **Query MEV Bundles**:
+
+  ```bash
+  pryzmd query block-sdk mev-bundles
+  ```
+
+## References
+
+For more details on the Block-SDK module, refer to the official Block-SDK documentation:
+- [Block-SDK Module](https://docs.block-sdk.com)
