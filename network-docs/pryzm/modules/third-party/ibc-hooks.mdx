@@ -1,0 +1,62 @@
+---
+title: "IBC-Hooks Module"
+description: "The IBC-Hooks module enables ICS-20 token transfers to initiate contract calls, adding programmable functionality to IBC transfers within the Pryzm network."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "IBC", "IBC-Hooks"]
+keywords: ["IBC-Hooks", "IBC", "ICS-20", "Smart Contracts", "Pryzm"]
+order: 5
+disabled: false
+---
+
+# IBC-Hooks Module
+
+The IBC-Hooks module enhances the functionality of the IBC protocol within the Pryzm network by enabling ICS-20 token transfers to trigger smart contract calls. This feature introduces programmable logic to cross-chain token transfers, allowing developers to create more dynamic and automated workflows.
+
+## Overview
+
+IBC-Hooks is a middleware module that extends the Inter-Blockchain Communication (IBC) protocol. It allows ICS-20 token transfers to be combined with smart contract execution, enabling the automation of processes such as staking, yield farming, or governance participation whenever a token transfer occurs.
+
+## Key Features
+
+- **Smart Contract Execution on Token Transfers**: Enables ICS-20 token transfers to trigger smart contract calls, allowing programmable logic to be integrated with IBC transactions.
+- **Automated Workflows**: Facilitates the automation of processes across chains, such as staking or yield farming, by combining token transfers with contract execution.
+- **Cross-Chain Functionality**: Enhances cross-chain interactions by enabling programmable functionality in IBC transfers.
+
+## Functions
+
+### Triggering Contract Calls
+
+The IBC-Hooks module allows ICS-20 token transfers to initiate contract calls, enabling complex interactions between blockchains during token transfers.
+
+```bash
+pryzmd tx ibc-hooks transfer TOKEN_DENOM DESTINATION_CHAIN --amount AMOUNT --contract-call '{"action": "trigger"}' --from YOUR_KEY --chain-id pryzm-chain
+```
+
+### Automated Contract Execution
+
+Developers can automate the execution of smart contracts when tokens are transferred via IBC, streamlining workflows such as staking or reward distribution.
+
+```bash
+pryzmd tx ibc-hooks execute TOKEN_TRANSFER_CONTRACT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the IBC-Hooks module using the following commands:
+
+- **Query Hooked Contracts**:
+
+  ```bash
+  pryzmd query ibc-hooks contracts
+  ```
+
+- **Query Active Transfers with Hooks**:
+
+  ```bash
+  pryzmd query ibc-hooks active-transfers
+  ```
+
+## References
+
+For more details on the IBC-Hooks module, refer to the official documentation:
+- [IBC-Hooks Module](https://docs.cosmos.network/ibc/ibc-hooks)
