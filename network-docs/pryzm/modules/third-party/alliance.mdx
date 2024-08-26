@@ -1,0 +1,62 @@
+---
+title: "Alliance Module"
+description: "The Alliance module allows for yield trading between different blockchains within the Pryzm ecosystem, facilitating cross-chain liquidity sharing."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "Alliance"]
+keywords: ["Alliance", "Cross-Chain Yield", "Liquidity Sharing", "Pryzm"]
+order: 3
+disabled: false
+---
+
+# Alliance Module
+
+The Alliance module in the Pryzm network is designed to facilitate yield trading and liquidity sharing between different blockchains. This module enables cross-chain collaborations, allowing blockchains to pool and trade yield, thereby creating a more interconnected and efficient DeFi ecosystem.
+
+## Overview
+
+The Alliance module makes it possible for different blockchains to enter into agreements to share and trade yield. This feature enhances liquidity across the ecosystem, promoting a more robust and scalable DeFi landscape within the Pryzm network.
+
+## Key Features
+
+- **Cross-Chain Yield Trading**: Facilitates the trading and sharing of yield between blockchains.
+- **Liquidity Sharing**: Allows blockchains to pool liquidity and distribute yield across chains.
+- **Interoperability**: Promotes cross-chain collaborations, enhancing the overall interconnectedness of the DeFi ecosystem.
+
+## Functions
+
+### Yield Trading
+
+The Alliance module allows blockchains to enter agreements to trade and share yield, enabling liquidity providers to maximize returns across multiple chains.
+
+```bash
+pryzmd tx alliance trade-yield PARTNER_CHAIN --amount AMOUNT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+### Liquidity Sharing
+
+Blockchains can pool liquidity across different chains, ensuring that yield is distributed efficiently and that liquidity is maintained where it's needed most.
+
+```bash
+pryzmd tx alliance share-liquidity PARTNER_CHAIN --amount AMOUNT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the Alliance module using the following commands:
+
+- **Query Active Alliances**:
+
+  ```bash
+  pryzmd query alliance active-alliances
+  ```
+
+- **Query Yield Distribution**:
+
+  ```bash
+  pryzmd query alliance yield-distribution
+  ```
+
+## References
+
+For more details on the Alliance module, refer to the official documentation:
+- [Alliance Module](https://docs.pryzm.zone/core/alliance)
