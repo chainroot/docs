@@ -1,0 +1,51 @@
+---
+title: "pGov Module"
+description: "The pGov module allows ICStaked asset holders to participate in the governance of the asset's native chain, mirroring proposals on PRYZM."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Governance"]
+keywords: ["Governance", "Pryzm", "pGov", "ICStaking"]
+order: 7
+disabled: false
+---
+
+# pGov Module
+
+The **pGov** module enables ICStaked asset holders to participate in the governance of the asset's native chain by voting on proposals using their cAssets and pAssets. Proposals from supported asset chains are mirrored on PRYZM, allowing for governance participation through PRYZM's pGov module.
+
+## Core Concepts
+
+### Staking pASSETs
+
+Holders of cAssets can refract their assets into pAssets and stake them to participate in native chain voting. The staked pAssets contribute to the voting power and can be redeemed anytime. The amount of staked assets at the time of vote tallying determines the voting power.
+
+### Mirroring Proposals
+
+Before a vote can occur, proposals from supported asset chains are mirrored on PRYZM. Users can submit these proposals to PRYZM with proof of their existence on the host chain. The mirrored proposals allow PRYZM users to vote within a shorter timeframe.
+
+### Proposal Voting
+
+Voting power is calculated based on the staked pAssets and cAsset balances. PRYZM utilizes weighted voting similar to the Cosmos governance module, allowing for various vote options and secure voting via Interchain Account (ICA) mechanisms.
+
+## Messages
+
+- **MsgUpdateParams:** Updates module parameters (used by the governance module).
+- **MsgStakePAssets:** Stakes pAssets to increase voting power.
+- **MsgUnstakePAssets:** Unstakes pAssets to decrease voting power.
+- **MsgSubmitProposal:** Submits a proposal from the host chain to PRYZM for governance.
+- **MsgSubmitVote:** Submits a vote on a mirrored proposal on PRYZM.
+- **MsgRetryVoteTransmit:** Retries the transmission of the final tally to the host chain.
+
+## Queries
+
+- **Params:** Fetches module parameters.
+- **StakedPAsset:** Retrieves the staked value of pAssets for a given account.
+- **Proposal:** Retrieves a mirrored proposal on PRYZM.
+- **Vote:** Retrieves a specific vote for a proposal.
+
+## Events
+
+- **EventPAssetStake:** Triggered when a user stakes pAssets.
+- **EventVoteSubmit:** Triggered when a user submits a vote on PRYZM.
+- **EventVoteTransmit:** Triggered when a proposal's final tally is sent to the host chain.
+
+For more detailed information, visit the official [pGov documentation on Pryzm](https://docs.pryzm.zone/core/pgov).
