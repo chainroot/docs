@@ -1,0 +1,62 @@
+---
+title: "Wasmd Module"
+description: "The Wasmd module enables smart contracts on the Pryzm network, allowing developers to deploy and execute WebAssembly (WASM) based contracts."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "Wasmd"]
+keywords: ["Wasmd", "Smart Contracts", "Pryzm", "WebAssembly"]
+order: 1
+disabled: false
+---
+
+# Wasmd Module
+
+The Wasmd module is a key integration in the Pryzm network, enabling the deployment and execution of smart contracts based on WebAssembly (WASM). This module allows developers to create and run complex decentralized applications (dApps) on the Pryzm blockchain.
+
+## Overview
+
+Wasmd is a third-party module that provides support for WASM smart contracts within the Pryzm ecosystem. It facilitates the creation, deployment, and execution of smart contracts, empowering developers to build innovative solutions that interact directly with the blockchain.
+
+## Key Features
+
+- **Smart Contract Support**: Enables the execution of WASM-based smart contracts on the Pryzm network.
+- **Flexible Contract Deployment**: Allows developers to deploy new smart contracts or interact with existing contracts.
+- **Decentralized Applications**: Supports the development of dApps that can automate processes and interact with on-chain data.
+
+## Functions
+
+### Smart Contract Deployment
+
+The Wasmd module allows users to deploy smart contracts written in WebAssembly, providing a flexible framework for creating decentralized applications.
+
+```bash
+pryzmd tx wasm store CONTRACT_CODE --from YOUR_KEY --chain-id pryzm-chain
+```
+
+### Smart Contract Execution
+
+Once deployed, smart contracts can be executed to perform various operations, such as transferring tokens, updating contract state, or interacting with other on-chain entities.
+
+```bash
+pryzmd tx wasm execute CONTRACT_ADDRESS '{ "execute": { "data": "example" } }' --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the Wasmd module using the following commands:
+
+- **Query Contract State**:
+
+  ```bash
+  pryzmd query wasm contract-state CONTRACT_ADDRESS
+  ```
+
+- **Query Contract Info**:
+
+  ```bash
+  pryzmd query wasm contract-info CONTRACT_ADDRESS
+  ```
+
+## References
+
+For more details on the Wasmd module, refer to the official Wasmd documentation:
+- [Wasmd Module](https://docs.cosmwasm.com/wasmd)
