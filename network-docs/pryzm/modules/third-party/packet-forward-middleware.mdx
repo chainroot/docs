@@ -1,0 +1,62 @@
+---
+title: "Packet-Forward Middleware Module"
+description: "The Packet-Forward Middleware module is an IBC middleware that enables the routing of incoming IBC packets from a source chain to a destination chain within the Pryzm network."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "IBC", "Packet-Forward Middleware"]
+keywords: ["Packet-Forward", "IBC Middleware", "Cross-Chain Routing", "Pryzm"]
+order: 4
+disabled: false
+---
+
+# Packet-Forward Middleware Module
+
+The Packet-Forward Middleware module is an IBC middleware integrated into the Pryzm network. It enables the routing of incoming IBC packets from a source chain to a destination chain. This middleware allows for seamless cross-chain communication and transfer of assets between interconnected blockchains.
+
+## Overview
+
+Packet-Forward Middleware is designed to facilitate the transfer of assets and messages between different blockchains connected via the Inter-Blockchain Communication (IBC) protocol. By enabling packet forwarding, this middleware enhances the interoperability between chains, making it easier to route transactions across the ecosystem.
+
+## Key Features
+
+- **Cross-Chain Routing**: Facilitates the routing of IBC packets from one chain to another, enabling seamless cross-chain communication.
+- **Asset Transfers**: Supports the transfer of assets between interconnected blockchains within the Pryzm ecosystem.
+- **Enhanced Interoperability**: Promotes interoperability between blockchains, allowing for more complex cross-chain interactions.
+
+## Functions
+
+### Forwarding IBC Packets
+
+The Packet-Forward Middleware module enables the forwarding of IBC packets from the source chain to the destination chain, ensuring that messages and transactions reach their intended targets.
+
+```bash
+pryzmd tx ibc packet-forward FORWARD_COMMAND --from YOUR_KEY --chain-id pryzm-chain
+```
+
+### Asset Transfers
+
+The module supports the transfer of assets across chains by routing the necessary IBC packets between source and destination chains.
+
+```bash
+pryzmd tx ibc transfer asset SOURCE_CHAIN DESTINATION_CHAIN --amount AMOUNT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the Packet-Forward Middleware module using the following commands:
+
+- **Query Packet Routes**:
+
+  ```bash
+  pryzmd query ibc packet-forward routes
+  ```
+
+- **Query Forwarded Packets**:
+
+  ```bash
+  pryzmd query ibc packet-forward forwarded-packets
+  ```
+
+## References
+
+For more details on the Packet-Forward Middleware module, refer to the official documentation:
+- [Packet-Forward Middleware Module](https://docs.cosmos.network/ibc/packet-forward)
