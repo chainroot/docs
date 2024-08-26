@@ -1,0 +1,62 @@
+---
+title: "Oracle Module"
+description: "The Oracle module provides generic oracle functionality for the Pryzm network, integrating data feeds from external sources."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Oracle"]
+keywords: ["Oracle", "Pryzm", "Data Feeds", "External Data"]
+order: 10
+disabled: false
+---
+
+# Oracle Module
+
+The Oracle module in the Pryzm network provides a generic oracle functionality, enabling the integration of external data into the blockchain. This module plays a crucial role in ensuring that data from outside the blockchain can be utilized for various operations, including price feeds, governance, and more.
+
+## Overview
+
+The Oracle module allows for flexible and reliable data sourcing by integrating external oracles into the blockchain. Modules can provide a vote callback to this module to use the external data in decision-making processes.
+
+## Key Features
+
+- **Generic Oracle Functionality**: Enables the integration of various data types from external sources.
+- **Vote Callback Integration**: Modules can register a callback to receive and process data from the oracle.
+- **Reliable Data Feeds**: Ensures that up-to-date and accurate data is available for on-chain operations.
+
+## Functions
+
+### Vote Callback
+
+Modules can implement a vote callback function that allows them to use the oracle data as needed. This flexibility allows for diverse use cases across the Pryzm network.
+
+```go
+type VoteCallback func(ctx sdk.Context, result Result)
+```
+
+### Oracle Query
+
+The module allows querying of oracle data, enabling other modules and contracts to access the information.
+
+```bash
+pryzmd query oracle data --source EXTERNAL_SOURCE
+```
+
+## Queries
+
+You can interact with the Oracle module using the following queries:
+
+- **Query Oracle Data**:
+
+  ```bash
+  pryzmd query oracle data --source EXTERNAL_SOURCE
+  ```
+
+- **Query Oracle Params**:
+
+  ```bash
+  pryzmd query oracle params
+  ```
+
+## References
+
+For more details on the Oracle module, refer to the official Pryzm documentation:
+- [Oracle Module](https://docs.pryzm.zone/core/oracle)
