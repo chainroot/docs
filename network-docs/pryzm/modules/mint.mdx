@@ -1,0 +1,80 @@
+---
+title: "Mint Module"
+description: "The Mint module handles the flexible creation of tokens on the Pryzm network, used for rewarding validators, incentivizing liquidity provision, and funding community efforts."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Mint"]
+keywords: ["Mint", "Pryzm", "Token Creation", "Inflation"]
+order: 9
+disabled: false
+---
+
+# Mint Module
+
+The Mint module is responsible for the creation of new tokens on the Pryzm network. These tokens are used for various purposes, such as rewarding validators, incentivizing liquidity provision in pools, and supporting community efforts.
+
+## Overview
+
+The Mint module handles the periodic creation of tokens based on predefined parameters. It uses time-based epochs, supported by the `epochs` module, and includes a flexible inflation rate mechanism that responds to market demand.
+
+## Key Concepts
+
+- **Inflation Rate**: The inflation rate adjusts based on the ratio of bonded tokens. If the bonded ratio is below the target (e.g., 67%), the inflation rate increases. Conversely, it decreases if the bonded ratio exceeds the target.
+- **Epoch-Based Minting**: New tokens are minted at the end of each epoch (default: one week).
+- **Distribution Proportions**: Minted tokens are distributed to various accounts, including staking rewards, pool incentives, and the community pool.
+
+## Functions
+
+### Inflation Calculation
+
+The inflation rate is recalculated at the end of each epoch. The rate can increase or decrease based on the bonded token ratio compared to the target ratio (67%).
+
+```go
+func (m Minter) NextInflationRate(params Params, bondedRatio sdk.Dec, epochsPerYear int64) sdk.Dec {
+  // (1 - bondedRatio/GoalBonded) * InflationRateChange
+  inflationRateChangePerYear := sdk.OneDec().
+    Sub(bondedRatio.Quo(params.GoalBonded)).
+    Mul(params.InflationRateChange)
+
+  inflationRateChange := inflationRateChangePerYear.Quo(sdk.NewDec(epochsPerYear))
+
+  // adjust the new annual inflation for this next cycle
+  inflation := m.Inflation.Add(inflationRateChange) // note inflationRateChange may be negative
+  if inflation.GT(params.InflationMax) {
+    inflation = params.InflationMax
+  }
+  if inflation.LT(params.InflationMin) {
+    inflation = params.InflationMin
+  }
+
+  return inflation
+}
+```
+
+### Distribution
+
+Minted tokens are distributed at the end of each epoch. The distribution proportions are determined by the module's parameters and are allocated to various accounts.
+
+```go
+func (k Keeper) distributeMintedCoin(ctx sdk.Context, mintedCoin sdk.Coin) (_ *types.DistributionProportions, err error)
+```
+
+## Queries
+
+You can query the Mint module using the following commands:
+
+- **Query Parameters**:
+
+  ```bash
+  pryzmd query mint params
+  ```
+
+- **Query Minter State**:
+
+  ```bash
+  pryzmd query mint minter
+  ```
+
+## References
+
+For more details on the Mint module, refer to the official Pryzm documentation:
+- [Mint Module](https://docs.pryzm.zone/core/mint)
