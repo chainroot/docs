@@ -1,0 +1,128 @@
+---
+title: "Incentives Module"
+description: "Specification documentation for the Incentives module in PRYZM, focusing on incentivizing participation in the system."
+author: "Moein Fatehi"
+categories: ["Blockchain", "PRYZM", "Incentives"]
+keywords: ["Incentives", "PRYZM", "Token Holders"]
+order: 6
+disabled: false
+---
+
+## Overview
+
+The Incentives module in PRYZM enables the incentivization of token holders who participate in various aspects of the system. Governance can configure incentive pools where token holders bond their tokens to earn rewards. These rewards may come from minted tokens or external sources, allowing for flexible incentivization strategies.
+
+- **Module Documentation**: For further details, refer to the official PRYZM documentation on the [Incentives Module](https://docs.pryzm.zone/core/incentives).
+
+## Key Concepts
+
+### Incentive Pool
+
+An incentive pool allows token holders to bond their tokens and receive rewards. Governance can configure pools with specific reward tokens, and more reward tokens can be added later through governance proposals.
+
+Key attributes of a pool:
+- **Bonded Token**: The token denomination and total bonded amount.
+- **Reward Tokens**: A list of reward tokens, with properties such as denomination, accumulated rewards, and weight.
+
+### Bonding and Rewards
+
+Token holders can bond their tokens to pools and earn rewards. When a reward is paid to a pool, the reward token's global index and amount are updated. The rewards are distributed based on the bonded amount of each user.
+
+### Unbonding and Claiming Rewards
+
+Users can unbond their tokens, but the unbonded amount may not be immediately available due to an `UnbondingPeriod`. Governance can adjust the unbonding period. Once the period ends, users can claim their unbonded tokens. There is also an option for automatic claiming.
+
+## Messages
+
+### MsgBond
+Allows users to bond tokens to a pool.
+```bash
+pryzmd tx incentives bond [amount]
+```
+
+### MsgClaimReward
+Allows users to claim accumulated rewards for a specific bond denomination.
+```bash
+pryzmd tx incentives claim-reward [bond-denom] [treasury]
+```
+
+### MsgUnbond
+Allows users to unbond tokens from a pool.
+```bash
+pryzmd tx incentives unbond [amount] [unbond-treasury] [reward-treasury] [auto-claim]
+```
+
+### MsgCancelUnbonding
+Allows users to cancel an unbonding request and re-bond tokens to a pool.
+```bash
+pryzmd tx incentives cancel-unbonding [unbonding-id] [amount]
+```
+
+### MsgClaimUnbonding
+Allows users to claim their unbonded tokens after the unbonding period ends.
+```bash
+pryzmd tx incentives claim-unbonding [unbonding-id]
+```
+
+## Queries
+
+### Query Params
+Fetches the current parameters of the module.
+```bash
+pryzmd query incentives params
+```
+
+### Query Pools
+Fetches a list of all incentive pools.
+```bash
+pryzmd query incentives list-pool
+```
+
+### Query Bonds
+Fetches a list of all bonds, optionally filtered by address.
+```bash
+pryzmd query incentives list-bond
+```
+
+### Query Unbondings
+Fetches a list of all unbondings, optionally filtered by address.
+```bash
+pryzmd query incentives list-unbonding
+```
+
+## Events
+
+- **EventBond**: Triggered when a user bonds tokens to a pool.
+- **EventUnbond**: Triggered when a user unbonds tokens from a pool.
+- **EventClaimReward**: Triggered when a user claims rewards from a pool.
+
+## Listeners
+
+The module integrates with the Mint module via mint hooks, allowing for the distribution of minted tokens to pools based on their weight.
+
+## State Management
+
+### Parameters
+The module stores its parameters, such as the unbonding period, with specific store keys.
+
+### Pools
+Pools are stored using their bond denomination, and bonds are stored using the bond denomination and user address.
+
+### Unbonding
+Unbondings are stored using a unique ID, with secondary indexes to fetch unbondings by user address.
+
+## Genesis State
+
+The genesis state includes the module parameters, lists of pools, bonds, and unbondings, and the total count of unbondings created to date.
+
+```protobuf
+message GenesisState {
+  Params params = 1;
+  repeated Pool pool_list = 2;
+  repeated Bond bond_list = 3;
+  repeated Unbonding unbonding_list = 4;
+  uint64 unbonding_count = 5;
+}
+```
+
+For more information, refer to the [Incentives Module documentation](https://docs.pryzm.zone/core/incentives).
