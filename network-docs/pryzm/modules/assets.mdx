@@ -1,0 +1,105 @@
+---
+title: "Assets Module"
+description: "Detailed exploration of the Assets module in Pryzm, managing refractable assets and their operations."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Assets"]
+keywords: ["Assets", "Pryzm", "Refractable Assets", "Liquid Assets"]
+order: 2
+disabled: false
+---
+
+# Assets Module Overview
+
+The **Assets** module within Pryzm is crucial for managing refractable assets, focusing on how assets are handled, refracted, and their maturity levels managed within the ecosystem. This module ensures fluid operation across different asset types and their lifecycle within the Pryzm network.
+
+## Key Features
+
+- **Refractable Asset Management**: Provides a robust framework for registering and managing the lifecycle of assets within the network.
+- **Maturity Level Control**: Automates the maturity processes for assets, facilitating seamless transitions between different maturity stages.
+- **Fee Ratio Management**: Utilizes fee ratios to manage transaction costs associated with asset operations, ensuring fair usage and incentivization within the platform.
+
+## How It Works
+
+### Asset Registration
+
+To introduce a new refractable asset to the network, the following structure is utilized:
+
+```protobuf
+message RefractableAsset {
+  string id = 1;
+  string token_denom = 2;
+  string host_chain_id = 3;
+  bool disabled = 4;
+  MaturityParams maturity_params = 5;
+  FeeRatios fee_ratios = 6;
+}
+```
+
+Assets are registered via a governance proposal or by an admin address. Upon registration, assets are subjected to parameters that define their operational framework within the network.
+
+### Maturity Levels
+
+Maturity levels dictate the lifecycle stages of refractable assets. These are defined based on periodic intervals and are managed through parameters which can be adjusted via governance:
+
+```protobuf
+message MaturityParams {
+  int32 levels_per_year = 1;
+  int32 years = 2;
+}
+```
+
+Maturity levels are critical for defining how assets mature over time and become eligible for different operations within the network.
+
+### Fee Ratios
+
+Operations on assets may incur fees, and these are managed through fee ratios defined for various asset operations:
+
+```protobuf
+message FeeRatios {
+  string yield = 1;
+  string refractor_refract = 2;
+  string refractor_merge = 3;
+  string refractor_redeem = 4;
+  string y_staking_claim_reward = 5;
+}
+```
+
+These fee ratios ensure that the network remains sustainable and that participants are adequately compensated or charged for their actions related to asset management.
+
+## Integration with Other Modules
+
+The Assets module works closely with other modules such as Governance, Oracle, and Staking to provide a comprehensive asset management solution:
+
+- **Governance Module**: Manages changes to assets and their parameters through community proposals.
+- **Oracle Module**: Provides necessary data inputs for accurate fee and maturity calculations.
+- **Staking Module**: Integrates with asset staking mechanisms to enhance the utility and yield potentials of refractable assets.
+
+## Using the Assets Module
+
+Users interact with the Assets module primarily through CLI commands which allow registration, update, and management of assets. Here are some examples:
+
+### Register a New Asset
+
+```bash
+pryzmd tx assets register --from <admin_address> --asset "<asset_json>"
+```
+
+### Update Maturity Parameters
+
+```bash
+pryzmd tx assets update-maturity-params --from <authority> --asset-id "<id>" --params "<params_json>"
+```
+
+### Query Asset Details
+
+```bash
+pryzmd query assets show-refractable-asset <asset_id>
+```
+
+## Documentation Reference
+
+For more in-depth details and operational guides, refer to the official [Assets Module Documentation](https://docs.pryzm.zone/core/assets).
+
+## Conclusion
+
+The Assets module stands as a pillar within the Pryzm ecosystem, providing essential functionalities for asset management and operations. It ensures that assets can be effectively refracted, managed, and utilized across various financial activities, making it integral to the Pryzm platform’s broader strategy of blockchain innovation and utility.
