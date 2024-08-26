@@ -1,0 +1,67 @@
+---
+title: "FlowTrade Module"
+description: "The FlowTrade module facilitates token swaps on the Pryzm network during defined trading periods, enabling time-based liquidity provision."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "FlowTrade"]
+keywords: ["FlowTrade", "Pryzm", "Token Swaps", "Liquidity"]
+order: 11
+disabled: false
+---
+
+# FlowTrade Module
+
+The FlowTrade module on the Pryzm network is designed to facilitate token swaps during a defined trading period. This module ensures that liquidity providers can offer and withdraw liquidity at specified times, enabling controlled and predictable trading dynamics.
+
+## Overview
+
+The FlowTrade module allows token swaps to occur within specific periods, giving users more control over when and how trades happen. This feature is especially useful for protocols that need time-based liquidity provision and for those looking to schedule trades in advance.
+
+## Key Features
+
+- **Time-Based Liquidity**: Facilitates the provision and withdrawal of liquidity during defined time periods.
+- **Scheduled Trading**: Allows for token swaps to be executed at predefined times, ensuring predictable market behavior.
+- **Controlled Token Swaps**: Enables users to plan and execute token swaps in a structured manner.
+
+## Functions
+
+### Scheduled Swaps
+
+The FlowTrade module supports the scheduling of token swaps, allowing users to set specific times for trades to be executed.
+
+```go
+type ScheduleSwap struct {
+    SwapID   string
+    Time     time.Time
+    Amount   sdk.Coin
+    Pair     string
+}
+```
+
+### Liquidity Management
+
+The module enables liquidity providers to add or withdraw liquidity during specific periods, contributing to the overall flow of trades in the network.
+
+```bash
+pryzmd tx flowtrade provide-liquidity PAIR AMOUNT --from YOUR_KEY
+```
+
+## Queries
+
+You can query the FlowTrade module using the following commands:
+
+- **Query Active Swaps**:
+
+  ```bash
+  pryzmd query flowtrade active-swaps
+  ```
+
+- **Query Swap Parameters**:
+
+  ```bash
+  pryzmd query flowtrade params
+  ```
+
+## References
+
+For more details on the FlowTrade module, refer to the official Pryzm documentation:
+- [FlowTrade Module](https://docs.pryzm.zone/core/flowtrade)
