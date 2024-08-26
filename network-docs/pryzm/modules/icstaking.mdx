@@ -1,36 +1,71 @@
 ---
-title: "ICStaking"
-description: "Overview of the ICStaking module in Pryzm, facilitating interchain liquid staking for Cosmos-based chains."
+title: "ICStaking Module"
+description: "Overview and comprehensive guide on the ICStaking module, facilitating liquid staking on Cosmos-based chains."
 author: "Moein Fatehi"
 categories: ["Blockchain", "Pryzm", "ICStaking"]
-keywords: ["ICStaking", "Pryzm", "Liquid Staking", "DeFi"]
+keywords: ["ICStaking", "Pryzm", "Liquid Staking", "Cosmos"]
 order: 1
 disabled: false
 ---
 
-# ICStaking Module
+# ICStaking Module Overview
 
-The ICStaking module is a core component of the Pryzm network that enables interchain liquid staking of Cosmos-based chains’ native tokens. This module supports the minting of cASSET as the liquid staking derivative (LSD), enhancing the flexibility and liquidity of staking operations within the network.
+The **ICStaking** module in Pryzm enables liquid staking of native tokens from various Cosmos-based chains, allowing users to mint LSD tokens (cAsset) by staking their assets. This module provides a sophisticated mechanism to handle staked assets, automating the delegation and compounding of staking rewards.
 
-## Features
+## Key Features
 
-- **Interchain Liquid Staking**: Allows users to stake their native tokens of Cosmos-based chains and receive cASSET, a liquid representation of the staked assets.
-- **Enhanced Liquidity**: cASSET can be used within the Pryzm DeFi ecosystem, providing liquidity while still earning staking rewards.
-- **Seamless Integration**: Designed to integrate smoothly with existing DeFi protocols within Pryzm, expanding the utility of staked assets.
+- **Liquid Staking:** Users can stake their native tokens and receive cAssets, which represent their staked and earning assets.
+- **Automated Compounding:** Automatically compounds staking rewards, enhancing the earning potential for stakers.
+- **Interchain Functionality:** Utilizes Cosmos's interchain accounts feature for executing staking-related operations on supported chains.
 
-## Benefits
+## How It Works
 
-- **Flexibility**: Users can trade or use their staked assets in various financial products without unbonding, offering greater control over their investments.
-- **Reward Optimization**: Facilitates earning staking rewards while participating in DeFi activities, maximizing return on investment.
-- **Decentralized Security**: Enhances the security of the network by decentralizing the staking process across multiple chains.
+### Staking Process
 
-## Use Cases
+Users stake their native tokens by transferring them into the ICStaking module. The module batches these assets and delegates them to validators on the respective host chains at defined intervals. This process includes:
 
-- **DeFi Participation**: Holders of cASSET can engage in lending, borrowing, and yield farming activities without relinquishing staking rewards.
-- **Portfolio Diversification**: Investors can diversify their portfolio by acquiring cASSET from various Cosmos-based chains.
+- **Batch Delegation:** Collects all incoming staking requests and processes them in batches to optimize transaction costs and efficiency.
+- **Reward Compounding:** Automatically stakes the earned rewards to maximize the stakers' returns.
 
-## Documentation Reference
+### Minting LSD Tokens
 
-For more detailed information and technical guidance on the ICStaking module, please refer to the [ICStaking documentation](https://docs.pryzm.zone/core/icstaking).
+Upon staking, users receive LSD tokens, specifically cAssets, which represent their staked principal plus the accruing rewards. These tokens increase in value over time as the underlying staked assets earn rewards.
 
-The ICStaking module represents a significant innovation in the staking landscape, merging traditional staking benefits with the dynamic capabilities of DeFi. It's a cornerstone of the Pryzm network's approach to integrating blockchain technology with real-world financial applications.
+### Multi-Sig and Loopback Support
+
+For chains not directly connected via ICA, the ICStaking module supports a multi-sig mechanism. This allows trusted multi-sig accounts to execute staking-related operations. Additionally, a loop-back feature enables staking of PRYZM's own bond token using the same infrastructure.
+
+## Integration with Other Modules
+
+The ICStaking module interacts with various other modules within the Pryzm ecosystem, providing a cohesive and integrated staking experience:
+
+- **Oracle Module:** Utilizes real-time data for accurate reward distribution and compounding.
+- **Governance Module:** Allows stakers to participate in governance decisions directly impacting the staking operations and parameters.
+
+## User Guide
+
+Users can interact with the ICStaking module using the following commands:
+
+### Staking Tokens
+
+```bash
+pryzmd tx icstaking stake <amount> --from <your_wallet> --chain-id <host_chain_id>
+```
+
+### Unstaking Tokens
+
+```bash
+pryzmd tx icstaking unstake <amount> --from <your_wallet> --chain-id <host_chain_id>
+```
+
+### Checking Staking Balance
+
+```bash
+pryzmd query icstaking balance <wallet_address>
+```
+
+For more detailed instructions on how to use the ICStaking module, refer to the official documentation at [Pryzm ICStaking Documentation](https://docs.pryzm.zone/core/icstaking).
+
+## Conclusion
+
+The ICStaking module is a cornerstone of the Pryzm ecosystem, providing users with a flexible and powerful tool for earning rewards through staking. Its integration with Cosmos's interchain technology makes it a versatile solution for users looking to maximize their earnings while contributing to the security and efficiency of the blockchain networks they support.
