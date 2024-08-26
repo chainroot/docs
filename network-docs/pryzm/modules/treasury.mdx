@@ -1,0 +1,58 @@
+---
+title: "Treasury Module"
+description: "Overview of the Treasury module in Pryzm, which offers fee collection and action scheduling on collected fees."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Treasury"]
+keywords: ["Treasury", "Pryzm", "Fee Collection", "Governance Actions"]
+order: 8
+disabled: false
+---
+
+# Treasury Module
+
+The Treasury module in Pryzm provides an API for fee collection and a system for scheduling actions on the collected fees, such as distributing them to stakers, burning tokens, or sending them to the community pool.
+
+## Key Concepts
+
+### Fee Collection
+
+Every module in Pryzm can impose protocol fees on operations. The Treasury module aggregates these fees and provides methods for fee collection, including `CollectFeeByRatio`, `ComputeFeeByRatio`, and `CollectFee`. These methods handle fee collection, calculation, and transfer to the fee pool.
+
+### Treasury Actions
+
+Governance can schedule actions on the collected fees, such as holding, burning, distributing to stakers, or sending to the community pool. Actions are executed periodically or until they expire, and non-Pryzm tokens can be traded for Pryzm tokens before executing an action.
+
+## Transitions
+
+The Treasury module executes actions at the end of each block, ensuring that scheduled actions are performed and tokens are used appropriately.
+
+## Parameters
+
+The Treasury module does not have any parameters.
+
+## Messages
+
+- `MsgUpdateParams`: Used to update module parameters through governance.
+- `MsgSetAction`: Sets an action to be executed on the collected fees.
+
+## Queries
+
+- `QueryParams`: Retrieves current module parameters.
+- `QueryGetAction`: Retrieves the current action.
+- `QueryAllFlowTrade`: Fetches all flow trades.
+- `QueryGetFlowTrade`: Fetches a specific flow trade.
+
+## Events
+
+- `EventTreasuryCollectFee`: Fired when fees are collected.
+- `EventCreateFlowForAmount`: Triggered when a flow trade starts.
+- `EventExecuteActionForAmount`: Activated when a specific treasury action is executed.
+- `EventSetAction`: Fired when a new action is set.
+- `EventSetFlowTrade`: Fired when a flow trade is set in the store.
+- `EventRemoveFlowTrade`: Fired when a flow trade is removed from the store.
+
+## Genesis
+
+The genesis state of the Treasury module includes the initial action and a list of unfinished flow trades.
+
+For more detailed information, refer to the [official Treasury documentation](https://docs.pryzm.zone/core/treasury).
