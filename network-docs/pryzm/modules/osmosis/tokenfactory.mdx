@@ -1,0 +1,66 @@
+---
+title: "TokenFactory Module"
+description: "The TokenFactory module allows for the creation of custom tokens within the Osmosis network, enabling users to mint new tokens with user-defined sub-denominations."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "TokenFactory"]
+keywords: ["TokenFactory", "Osmosis", "Custom Tokens", "Minting"]
+order: 2
+disabled: false
+---
+
+# TokenFactory Module
+
+The TokenFactory module in the Osmosis network allows users to create custom tokens with unique sub-denominations. This module provides the flexibility to mint new tokens under a specific creator's address, enabling various use cases for token creation and distribution within the Osmosis ecosystem.
+
+## Overview
+
+The TokenFactory module facilitates the minting of new tokens in the format `factory/{creator address}/{subdenom}`. This functionality allows for the creation of custom tokens that can be used for various purposes, such as incentivizing liquidity provision, creating stablecoins, or launching new projects within the Osmosis ecosystem.
+
+## Key Features
+
+- **Custom Token Creation**: Allows users to mint new tokens with user-defined sub-denominations.
+- **Token Ownership**: Tokens minted through the TokenFactory module are tied to the creator's address, ensuring ownership and control.
+- **Flexibility**: Provides a flexible framework for creating tokens that can serve different purposes within the Osmosis network.
+
+## Functions
+
+### Token Minting
+
+Users can mint new tokens by specifying the creator address and the desired sub-denomination. This flexibility allows for the creation of tokens tailored to specific use cases.
+
+```go
+type MsgMintToken struct {
+    Creator   string
+    Subdenom  string
+    Amount    sdk.Coin
+}
+```
+
+### Token Management
+
+The module also allows token creators to manage their custom tokens, including burning tokens or transferring them to other accounts.
+
+```bash
+pryzmd tx tokenfactory mint TOKEN_DENOM AMOUNT --from YOUR_KEY
+```
+
+## Queries
+
+You can interact with the TokenFactory module using the following queries:
+
+- **Query Token Denominations**:
+
+  ```bash
+  pryzmd query tokenfactory denominations
+  ```
+
+- **Query Token Supply**:
+
+  ```bash
+  pryzmd query tokenfactory supply TOKEN_DENOM
+  ```
+
+## References
+
+For more details on the TokenFactory module, refer to the official Osmosis documentation:
+- [TokenFactory Module](https://docs.osmosis.zone/modules/tokenfactory)
