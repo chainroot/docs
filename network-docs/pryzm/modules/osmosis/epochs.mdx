@@ -1,0 +1,67 @@
+---
+title: "Epochs Module"
+description: "The Epochs module manages fixed time periods within the Osmosis network, during which specific network operations can be executed."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Osmosis", "Epochs"]
+keywords: ["Epochs", "Osmosis", "Network Operations", "Time Periods"]
+order: 1
+disabled: false
+---
+
+# Epochs Module
+
+The Epochs module in the Osmosis network is responsible for managing fixed periods of time, known as epochs, during which certain network functions and operations are executed. This module helps structure the execution of repetitive tasks, such as reward distribution, minting, and other time-dependent events.
+
+## Overview
+
+An epoch is a defined period of time, and the Epochs module ensures that specific actions occur at regular intervals. This structured timing is crucial for ensuring consistency across the network, especially for operations that require synchronization, like staking rewards or liquidity incentives.
+
+## Key Features
+
+- **Fixed Time Intervals**: Defines and manages epochs, ensuring that operations are executed at regular intervals.
+- **Time-Triggered Operations**: Allows modules to schedule functions to run at the end of each epoch.
+- **Epoch-Based Events**: Ensures that events such as rewards distribution and minting happen consistently across the network.
+
+## Functions
+
+### Epoch Creation
+
+The Epochs module allows the creation of epochs with specified durations. These epochs are then used to trigger events across the network.
+
+```go
+type Epoch struct {
+    Identifier string
+    Duration   time.Duration
+    CurrentEpoch int64
+    StartTime   time.Time
+}
+```
+
+### Scheduling Operations
+
+Modules can register operations to be executed at the end of each epoch. These operations include tasks such as distributing staking rewards or minting new tokens.
+
+```bash
+pryzmd tx epochs schedule-operation OPERATION_NAME --epoch EPOCH_ID --from YOUR_KEY
+```
+
+## Queries
+
+You can query the Epochs module using the following commands:
+
+- **Query Current Epoch**:
+
+  ```bash
+  pryzmd query epochs current --identifier EPOCH_ID
+  ```
+
+- **Query Epoch Parameters**:
+
+  ```bash
+  pryzmd query epochs params
+  ```
+
+## References
+
+For more details on the Epochs module, refer to the official Osmosis documentation:
+- [Epochs Module](https://docs.osmosis.zone/modules/epochs)
