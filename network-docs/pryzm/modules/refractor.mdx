@@ -1,0 +1,76 @@
+---
+title: "Refractor Module"
+description: "In-depth guide on the Refractor module, enabling the refraction and redemption of cASSETs into pASSETs and yASSETs."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Pryzm", "Refractor"]
+keywords: ["Refractor", "Pryzm", "cASSETs", "pASSETs", "yASSETs"]
+order: 3
+disabled: false
+---
+
+# Refractor Module Overview
+
+The **Refractor** module in Pryzm is pivotal for managing the transformation of cASSETs into yield (yASSET) and principal (pASSET) components, and vice versa, enabling users to effectively manage their investment maturity and liquidity. This module oversees the intricate processes of asset refraction and redemption.
+
+## Key Features
+
+- **Asset Refraction**: Splits cASSETs into principal and yield components at specified maturities, allowing users to manage financial outcomes based on their needs.
+- **Yield and Principal Management**: Manages the accumulation and redemption of yield and principal, adjusting holdings according to the asset's performance and user actions.
+- **cASSET Vault**: Maintains a reserve of cASSETs, facilitating the refraction and redemption processes.
+
+## How It Works
+
+### Refraction Process
+
+Refraction allows cASSET holders to split their assets into pASSETs and yASSETs. This process helps manage the liquidity and maturity of investments:
+
+```bash
+pryzmd tx refractor refract [amount] [maturity] --from [address]
+```
+
+- **Refract Command**: Splits the specified amount of cASSETs into pASSETs and yASSETs based on the chosen maturity.
+
+### Redemption Process
+
+Redemption enables users to convert their pASSETs and yASSETs back into cASSETs, providing liquidity and closing out the investment:
+
+```bash
+pryzmd tx refractor redeem [p-amount] [y-amount] --from [address]
+```
+
+- **Redeem Command**: Converts the specified amounts of pASSETs and yASSETs back into cASSETs, deducting any applicable fees.
+
+## Integration with Other Modules
+
+The Refractor module interfaces with the Oracle and Treasury modules to manage exchange rates and fee structures, ensuring accurate and fair transactions:
+
+- **Oracle Module**: Provides current exchange rates that influence the refraction and redemption calculations.
+- **Treasury Module**: Manages fees associated with asset transactions, supporting the network's economic stability.
+
+## Using the Refractor Module
+
+### Executing Refraction
+
+```bash
+pryzmd tx refractor refract <amount> <maturity> --from <your_address>
+```
+
+- Executes the refraction of the specified cASSET amount into pASSETs and yASSETs.
+
+### Executing Redemption
+
+```bash
+pryzmd tx refractor redeem <p_amount> <y_amount> --from <your_address>
+```
+
+- Redeems cASSETs by burning the specified amounts of pASSETs and yASSETs.
+
+## Advanced Features
+
+### Yield Management
+
+The module also handles the distribution of yields from the cASSET vault, ensuring that investors receive returns on their staked assets.
+
+## Conclusion
+
+The Refractor module is a core component of the Pryzm ecosystem, facilitating crucial asset management functionalities that enhance the platform's flexibility and user engagement. For more comprehensive details, refer to the official [Refractor Module Documentation](https://docs.pryzm.zone/core/refractor).
