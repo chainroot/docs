@@ -1,0 +1,62 @@
+---
+title: "IBC Rate-Limiting Module"
+description: "The IBC Rate-Limiting module prevents massive inflows or outflows of IBC tokens in a short timeframe, enhancing security and stability in cross-chain transfers."
+author: "Moein Fatehi"
+categories: ["Blockchain", "Third-Party", "IBC", "Rate-Limiting"]
+keywords: ["IBC Rate-Limiting", "IBC", "Security", "Cross-Chain Transfers", "Pryzm"]
+order: 6
+disabled: false
+---
+
+# IBC Rate-Limiting Module
+
+The IBC Rate-Limiting module is a middleware solution integrated into the Pryzm network that provides an additional layer of security for cross-chain token transfers. It prevents massive inflows or outflows of IBC tokens within a short timeframe, offering protection against economic instability, attacks, or potential bugs.
+
+## Overview
+
+IBC Rate-Limiting helps maintain the security and stability of cross-chain transactions by controlling the flow of tokens. This module is particularly useful in preventing scenarios where large amounts of tokens are moved in a way that could destabilize the receiving or sending blockchain, whether due to malicious intent or unintended errors.
+
+## Key Features
+
+- **Flow Control**: Limits the rate of IBC token transfers to prevent large, destabilizing inflows or outflows.
+- **Enhanced Security**: Protects against economic attacks or bugs that could lead to massive token movements across chains.
+- **Stability**: Helps ensure the stability of the Pryzm network and other interconnected blockchains by controlling token flows.
+
+## Functions
+
+### Rate-Limiting Token Transfers
+
+The IBC Rate-Limiting module ensures that token transfers via IBC do not exceed predefined thresholds, safeguarding the network from potential economic instability.
+
+```bash
+pryzmd tx ibc rate-limit set-limits --token TOKEN_DENOM --max-inflow MAX_AMOUNT --max-outflow MAX_AMOUNT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+### Managing Rate Limits
+
+Network operators can adjust the rate limits for specific tokens to suit the needs of their blockchain, ensuring the network remains secure while accommodating expected transaction volumes.
+
+```bash
+pryzmd tx ibc rate-limit update-limits --token TOKEN_DENOM --new-max-inflow MAX_AMOUNT --new-max-outflow MAX_AMOUNT --from YOUR_KEY --chain-id pryzm-chain
+```
+
+## Queries
+
+You can query the IBC Rate-Limiting module using the following commands:
+
+- **Query Current Rate Limits**:
+
+  ```bash
+  pryzmd query ibc rate-limit limits
+  ```
+
+- **Query Recent Transfers**:
+
+  ```bash
+  pryzmd query ibc rate-limit recent-transfers
+  ```
+
+## References
+
+For more details on the IBC Rate-Limiting module, refer to the official documentation:
+- [IBC Rate-Limiting Module](https://docs.cosmos.network/ibc/rate-limiting)
